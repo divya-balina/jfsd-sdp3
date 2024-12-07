@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .actions button {
+            width: auto;
+            padding: 8px 12px;
+        }
+
+        .edit-btn {
+            background-color: #007BFF;
+        }
+
+        .edit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .delete-btn {
+            background-color: #f44336;
+        }
+
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User Management</h1>
+
+        <!-- Add/Edit User Form -->
+        <form id="userForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role</label>
+                <select id="role" name="role" required>
+                    <option value="Admin">Admin</option>
+                    <option value="Teacher">Teacher</option>
+                    <option value="Student">Student</option>
+                </select>
+            </div>
+            <button type="submit" id="addUserBtn" disabled>Add User</button>
+        </form>
+
+        <!-- User Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="userTable">
+                <!-- User rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Form and table references
+        const userForm = document.getElementById('userForm');
+        const userTable = document.getElementById('userTable');
+        const roleSelect = document.getElementById('role');
+        const addUserBtn = document.getElementById('addUserBtn');
+
+        // Track the current user being edited (null if none)
+        let editingUser = null;
+
+        // Enable/Disable the Add User button based on the selected role
+        roleSelect.addEventListener('change', function () {
+            if (roleSelect.value === 'Admin' || roleSelect.value === 'Teacher') {
+                addUserBtn.disabled = false;
+            } else {
+                addUserBtn.disabled = true;
+            }
+        });
+
+        // Handle form submission
+        userForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value; // For now, we won't store/display it
+            const role = document.getElementById('role').value;
+
+            if (editingUser) {
+                // Update the existing row
+                editingUser.cells[0].innerText = username;
+                editingUser.cells[1].innerText = role;
+                editingUser = null;
+            } else {
+                // Add a new row to the table
+                const newRow = userTable.insertRow();
+                newRow.innerHTML = `
+                    <td>${username}</td>
+                    <td>${role}</td>
+                    <td class="actions">
+                        <button class="edit-btn">Edit</button>
+                        <button class="delete-btn">Delete</button>
+                    </td>
+                `;
+                attachRowEventListeners(newRow);
+            }
+
+            // Reset the form
+            userForm.reset();
+            addUserBtn.disabled = true; // Disable button after adding a user
+        });
+
+        // Attach event listeners for edit and delete buttons
+        function attachRowEventListeners(row) {
+            const editButton = row.querySelector('.edit-btn');
+            const deleteButton = row.querySelector('.delete-btn');
+
+            editButton.addEventListener('click', function () {
+                // Load the row data into the form
+                editingUser = row;
+                document.getElementById('username').value = row.cells[0].innerText;
+                document.getElementById('role').value = row.cells[1].innerText;
+
+                // Ensure the button is enabled if Admin/Teacher is selected
+                if (row.cells[1].innerText === 'Admin' || row.cells[1].innerText === 'Teacher') {
+                    addUserBtn.disabled = false;
+                } else {
+                    addUserBtn.disabled = true;
+                }
+            });
+
+            deleteButton.addEventListener('click', function () {
+                // Remove the row from the table
+                row.remove();
+            });
+        }
+    </script>
+</body>
+</html>

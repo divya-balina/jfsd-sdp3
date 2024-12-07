@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        select {
+            padding: 5px;
+            font-size: 14px;
+            width: 120px;
+        }
+
+        button {
+            display: block;
+            width: 200px;
+            margin: 0 auto;
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Attendance Management</h2>
+
+        <!-- Attendance Table -->
+        <table id="attendanceTable">
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Student ID</th>
+                    <th>Attendance Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Student Attendance Rows -->
+                <tr>
+                    <td>John Doe</td>
+                    <td>101</td>
+                    <td>
+                        <select class="attendanceStatus" data-id="101">
+                            <option value="Present">Present</option>
+                            <option value="Absent">Absent</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>102</td>
+                    <td>
+                        <select class="attendanceStatus" data-id="102">
+                            <option value="Present">Present</option>
+                            <option value="Absent">Absent</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Mike Johnson</td>
+                    <td>103</td>
+                    <td>
+                        <select class="attendanceStatus" data-id="103">
+                            <option value="Present">Present</option>
+                            <option value="Absent">Absent</option>
+                        </select>
+                    </td>
+                </tr>
+                <!-- Add more students as needed -->
+            </tbody>
+        </table>
+
+        <!-- Submit Button -->
+        <button id="submitAttendanceBtn">Submit Attendance</button>
+
+        <!-- Success Message -->
+        <div id="successMessage" class="success-message">
+            Attendance Posted
+        </div>
+    </div>
+
+    <script>
+        // JavaScript to handle the attendance submission
+        document.getElementById('submitAttendanceBtn').addEventListener('click', function() {
+            // Get all attendance status select elements
+            const attendanceElements = document.querySelectorAll('.attendanceStatus');
+
+            let attendanceData = [];
+
+            // Iterate over each attendance select element and gather data
+            attendanceElements.forEach(function(selectElement) {
+                const studentId = selectElement.getAttribute('data-id');
+                const attendanceStatus = selectElement.value;
+
+                attendanceData.push({
+                    studentId: studentId,
+                    status: attendanceStatus
+                });
+            });
+
+            // Display the attendance data in the console
+            console.log("Attendance Data:", attendanceData);
+
+            // Display success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+
+            // Optionally: Hide the success message after 3 seconds
+            setTimeout(function() {
+                successMessage.style.display = 'none';
+            }, 3000);
+
+            // Optional: You can send this data to a server using an AJAX request
+            // Example:
+            // fetch('/submitAttendance', {
+            //     method: 'POST',
+            //     body: JSON.stringify(attendanceData),
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     }
+            // })
+            // .then(response => response.json())
+            // .then(data => console.log(data))
+            // .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

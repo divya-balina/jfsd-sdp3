@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses Module</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(rgba(221, 33, 221, 0.6), rgba(216, 234, 14, 0.6));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .header h1 {
+            font-size: 2.2em;
+            color: #333;
+        }
+        .course-card {
+            background: #fff;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .course-header {
+            background: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.5em;
+        }
+        .course-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            color: #555;
+        }
+        .course-info {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .course-description {
+            font-size: 1em;
+            line-height: 1.6;
+        }
+        .details {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .details div {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .details div strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Enrolled Courses</h1>
+            <p>Get detailed information on your courses, including schedules, grades, and prerequisites.</p>
+        </div>
+        
+        <!-- Course Card Example -->
+        <div class="course-card">
+            <div class="course-header">Data Structures</div>
+            <div class="course-content">
+                <div class="course-info">
+                    <span><strong>Credits:</strong> 4</span>
+                    <span><strong>Semester:</strong> Spring 2024</span>
+                </div>
+                <p class="course-description">
+                    Explore data structures like arrays, stacks, queues, linked lists, trees, and graphs, focusing on performance and applications.
+                </p>
+                <div class="details">
+                    <div><strong>Instructor:</strong> Prof. Alice Johnson</div>
+                    <div><strong>Office Hours:</strong> Tue/Thu 2-4 PM</div>
+                    <div><strong>Contact:</strong> alice.johnson@university.edu</div>
+                    <div><strong>Prerequisites:</strong> Intro to Programming</div>
+                    <div><strong>Syllabus:</strong> <a href="#">Download PDF</a></div>
+                    <div><strong>Timetable:</strong> Mon/Wed 9-10:30 AM</div>
+                </div>
+            </div>
+        </div>
+        <div class="course-card">
+            <div class="course-header">Data Structures</div>
+            <div class="course-content">
+                <div class="course-info">
+                    <span><strong>Credits:</strong> 4</span>
+                    <span><strong>Semester:</strong> Spring 2024</span>
+                </div>
+                <p class="course-description">
+                    Explore data structures like arrays, stacks, queues, linked lists, trees, and graphs, focusing on performance and applications.
+                </p>
+                <div class="details">
+                    <div><strong>Instructor:</strong> Prof. Alice Johnson</div>
+                    <div><strong>Office Hours:</strong> Tue/Thu 2-4 PM</div>
+                    <div><strong>Contact:</strong> alice.johnson@university.edu</div>
+                    <div><strong>Prerequisites:</strong> Intro to Programming</div>
+                    <div><strong>Syllabus:</strong> <a href="#">Download PDF</a></div>
+                    <div><strong>Timetable:</strong> Mon/Wed 9-10:30 AM</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional courses can be added as similar course-card divs -->
+
+    </div>
+</body>
+</html>

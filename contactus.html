@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Learn Trackr</title>
+    <style>
+        /* POPPINS FONT */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* ===== COLOR VARIABLES ===== */
+
+        :root {
+            --primary-color: #6657f4;
+            --second-color: #ffffff;
+            --black-color: #000000;
+        }
+
+        /* ===== BODY - BACKGROUND COLOR ===== */
+
+        body {
+            background: #9a90f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* ===== CONTACT BOX ===== */
+
+        .contact-box {
+            width: 450px;
+            padding: 2em;
+            border: 3px solid var(--primary-color);
+            border-radius: 15px;
+            background-color: var(--second-color);
+            box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-header {
+            text-align: center;
+            margin-bottom: 1.5em;
+            color: var(--primary-color);
+        }
+
+        .contact-header h2 {
+            font-size: 28px;
+        }
+
+        .input_box {
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-field {
+            width: 100%;
+            height: 45px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            outline: none;
+            color: var(--black-color);
+            background: transparent;
+        }
+
+        .textarea-field {
+            width: 100%;
+            height: 120px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid var(--primary-color);
+            border-radius: 30px;
+            outline: none;
+            color: var(--black-color);
+            background: transparent;
+            resize: none;
+        }
+
+        .input-submit {
+            width: 100%;
+            height: 50px;
+            background: var(--primary-color);
+            color: var(--second-color);
+            font-size: 16px;
+            font-weight: 500;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: .3s ease-in-out;
+        }
+
+        .input-submit:hover {
+            background: #1d0db2;
+        }
+
+        @media only screen and (max-width: 564px) {
+            .contact-box {
+                width: 90%;
+                padding: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contact-box">
+        <div class="contact-header">
+            <h2>Contact Us</h2>
+        </div>
+        <form id="contactForm">
+            <div class="input_box">
+                <input type="text" class="input-field" required placeholder="Full Name">
+            </div>
+            <div class="input_box">
+                <input type="email" class="input-field" required placeholder="Email Address">
+            </div>
+            <div class="input_box">
+                <input type="text" class="input-field" required placeholder="Subject">
+            </div>
+            <div class="input_box">
+                <textarea class="textarea-field" required placeholder="Your Message"></textarea>
+            </div>
+            <button type="submit" class="input-submit">Send Message</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission
+            // Add your form submission logic here (e.g., send data to server)
+            alert('Your message has been sent!'); // Temporary alert
+            this.reset(); // Reset form after submission
+        });
+    </script>
+</body>
+</html>

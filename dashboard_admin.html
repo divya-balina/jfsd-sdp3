@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Trackr - Admin Panel</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            display: flex;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #2e3b4e;
+            color: white;
+            padding: 15px;
+            height: 100vh;
+            position: fixed;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #4CAF50;
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+            flex-grow: 1;
+        }
+
+        .main-content h1 {
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <h1>Learn Trackr - Admin Panel</h1>
+        </div>
+        <div class="menu">
+            <a href="#">Dashboard</a>
+            <a href="#">Logout</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Admin Menu</h2>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="usermanage.html">User Management</a></li>
+                <li><a href="attendancemanage.html">Attendance Management</a></li>
+                <li><a href="coursemanage.html">Course Management</a></li>
+                <li><a href="eventcalmanage.html">Event Calendar Management</a></li>
+                <li><a href="exammanage.html">Exam Management</a></li>
+                <li><a href="extracirmanage.html">Extracurricular Management</a></li>
+                <li><a href="grademanage.html">Grade Analysis and Management</a></li>
+                <li><a href="performmanage.html">Performance Insights</a></li>
+                <li><a href="#">Communication</a></li>
+                
+            </ul>
+        </div>
+        <div class="main-content">
+            <h1>-      Dashboard</h1>
+            <div class="card">
+                <h2>Overview</h2>
+                <p>Statistics and recent activities will be displayed here.</p>
+            </div>
+            <div class="card">
+                <h2>Recent Activity</h2>
+                <p>Latest updates and notifications will be shown here.</p>
+            </div>
+            <div class="card">
+                <h2>Quick Links</h2>
+                <p>Access important actions quickly from here.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

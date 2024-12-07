@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Analysis - Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(rgba(91, 238, 54, 0.6), rgba(234, 135, 14, 0.6));
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .container {
+            max-width: 900px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .section {
+            margin-top: 20px;
+        }
+        .section h2 {
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #b53da1;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #e9edee;
+        }
+        /* Add a form style for the Admin Panel */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        input, select, button {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <!-- Link to Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Grade Analysis - Admin Panel</h1>
+
+        <!-- Admin Form to Add/Edit Grades -->
+        <div class="section">
+            <h2>Add Course Information</h2>
+            <form id="courseForm">
+                <input type="text" id="courseCode" placeholder="Course Code" required>
+                <input type="text" id="courseName" placeholder="Course Name" required>
+                <input type="number" id="assignmentsAvg" placeholder="Assignments Avg (%)" required>
+                <input type="number" id="examsAvg" placeholder="Exams Avg (%)" required>
+                <button type="submit">Add Course</button>
+            </form>
+        </div>
+
+        <!-- Grade Summary and Course Breakdown -->
+        <div class="section">
+            <h2>Overall Grade Summary</h2>
+            <p>Current GPA: <strong id="gpa">3.7</strong></p>
+
+            <h2>Course Breakdown</h2>
+            <table id="courseTable">
+                <thead>
+                    <tr>
+                        <th>Course Code</th>
+                        <th>Course Name</th>
+                        <th>Overall Grade</th>
+                        <th>Assignments Avg</th>
+                        <th>Exams Avg</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Data will be added dynamically here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Trends Over Time -->
+        <div class="section">
+            <h2>Trends Over Time</h2>
+            <canvas id="gradeTrendChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+
+    <!-- JavaScript to Handle Admin Panel Actions -->
+    <script>
+        const courseForm = document.getElementById('courseForm');
+        const courseTable = document.getElementById('courseTable').getElementsByTagName('tbody')[0];
+        const gpaElement = document.getElementById('gpa');
+        
+        // Example Data
+        const courses = [
+            { courseCode: 'CS101', courseName: 'Data Structures', assignmentsAvg: 85, examsAvg: 90 },
+            { courseCode: 'MA201', courseName: 'Calculus II', assignmentsAvg: 75, examsAvg: 85 }
+        ];
+
+        // Function to add new course
+        function addCourse(course) {
+            const newRow = courseTable.insertRow();
+            newRow.innerHTML = `
+                <td>${course.courseCode}</td>
+                <td>${course.courseName}</td>
+                <td>${(course.assignmentsAvg + course.examsAvg) / 2}%</td>
+                <td>${course.assignmentsAvg}%</td>
+                <td>${course.examsAvg}%</td>
+            `;
+            updateGPA();
+        }
+
+        // Function to update GPA (average of all courses' averages)
+        function updateGPA() {
+            let total = 0;
+            courses.forEach(course => {
+                total += (course.assignmentsAvg + course.examsAvg) / 2;
+            });
+            const gpa = total / courses.length;
+            gpaElement.textContent = gpa.toFixed(2);
+        }
+
+        // Handle form submission to add a course
+        courseForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const courseCode = document.getElementById('courseCode').value;
+            const courseName = document.getElementById('courseName').value;
+            const assignmentsAvg = parseFloat(document.getElementById('assignmentsAvg').value);
+            const examsAvg = parseFloat(document.getElementById('examsAvg').value);
+
+            const newCourse = { courseCode, courseName, assignmentsAvg, examsAvg };
+            courses.push(newCourse);
+            addCourse(newCourse);
+
+            // Clear form fields
+            courseForm.reset();
+        });
+
+        // Initialize the table with existing courses
+        courses.forEach(addCourse);
+
+        // JavaScript to Create Chart (Trends Over Time)
+        const ctx = document.getElementById('gradeTrendChart').getContext('2d');
+        const gradeTrendChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Assignment 1', 'Midterm', 'Assignment 2', 'Final Exam'],
+                datasets: [{
+                    label: 'Student Score (%)',
+                    data: [80, 90, 87, 95],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 2,
+                    fill: true,
+                    lineTension: 0.2
+                }, {
+                    label: 'Class Average (%)',
+                    data: [78, 85, 80, 88],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderWidth: 2,
+                    fill: true,
+                    lineTension: 0.2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    },
+                    tooltip: {
+                        enabled: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

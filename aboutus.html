@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Learn Trackr</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #9a90f5;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 20px 10%;
+            background-color: #ffffff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 60px;
+            height: auto;
+        }
+
+        .logo-text {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #4CAF50;
+            font-style: italic;
+        }
+
+        .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #4CAF50;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: color 0.3s, background-color 0.3s;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+
+        .menu a:hover {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        /* About Us Section */
+        .about-section {
+            max-width: 800px;
+            margin: 60px 20px;
+            padding: 30px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        .about-title {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .about-description {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: justify;
+            color: #555;
+        }
+
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            background: #e7f3fe;
+            border-left: 5px solid #4CAF50;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        /* Footer */
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 20px 10%;
+            background-color: #ffffff;
+            color: #333;
+            margin-top: 20px;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px 5%;
+            }
+
+            .menu {
+                gap: 15px;
+            }
+
+            .about-title {
+                font-size: 2em;
+            }
+
+            .about-description {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="simple-graduation-pencil-logo-design-graduation_1038422-1219.jpg" alt="Learn Trackr Logo">
+            <div class="logo-text">Learn Trackr</div>
+        </div>
+        <div class="menu">
+            <a href="index.html">Login</a>
+            <a href="aboutus.html">About Us</a>
+            <a href="#">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- About Us Section -->
+    <div class="about-section">
+        <h1 class="about-title">About Us</h1>
+        <p class="about-description">
+            Learn Trackr is a revolutionary platform dedicated to empowering educators with the tools they need to enhance student performance and drive academic success. Our mission is to provide real-time insights and analytics to help educators make informed decisions and create impactful learning experiences.
+        </p>
+        <h2>Our Features</h2>
+        <ul class="feature-list">
+            <li class="feature-item">Real-time Analytics: Track student performance with up-to-date data.</li>
+            <li class="feature-item">User-Friendly Interface: Designed for ease of use for both educators and students.</li>
+            <li class="feature-item">Customizable Reports: Generate reports tailored to specific needs and goals.</li>
+            <li class="feature-item">Interactive Dashboard: Visualize data trends and insights at a glance.</li>
+            <li class="feature-item">Support & Resources: Access a wealth of resources to help you maximize the platform's potential.</li>
+        </ul>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Learn Trackr. All Rights Reserved.</p>
+    </div>
+
+</body>
+</html>

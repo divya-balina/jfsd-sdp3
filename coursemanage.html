@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .course-form {
+            margin-bottom: 30px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .file-upload {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <h2>Course Management System</h2>
+
+        <!-- Course Management Form -->
+        <div class="course-form">
+            <h3>Add or Edit Course</h3>
+            <input type="text" id="courseName" placeholder="Course Name" required>
+            <select id="teacherSelect" required>
+                <option value="">Select Teacher</option>
+                <option value="Teacher 1">Teacher 1</option>
+                <option value="Teacher 2">Teacher 2</option>
+                <option value="Teacher 3">Teacher 3</option>
+            </select>
+            <textarea id="courseMaterials" rows="4" placeholder="Course Materials (e.g., Syllabus, Notes)"></textarea>
+            <div class="file-upload">
+                <label for="courseFile">Upload Course Material (e.g., Syllabus)</label>
+                <input type="file" id="courseFile" accept=".pdf,.doc,.docx,.pptx" />
+            </div>
+            <button onclick="addCourse()">Add Course</button>
+        </div>
+
+        <!-- Course List -->
+        <table id="courseTable">
+            <thead>
+                <tr>
+                    <th>Course Name</th>
+                    <th>Teacher Name</th>
+                    <th>Course Materials</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Courses will be listed here dynamically -->
+            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+        // Course Management
+        let courses = [];
+
+        function addCourse() {
+            const courseName = document.getElementById('courseName').value;
+            const teacherName = document.getElementById('teacherSelect').value;
+            const courseMaterials = document.getElementById('courseMaterials').value;
+            const courseFile = document.getElementById('courseFile').files[0];
+
+            if (courseName && teacherName) {
+                let fileName = '';
+                if (courseFile) {
+                    fileName = courseFile.name;
+                }
+
+                courses.push({
+                    courseName: courseName,
+                    teacherName: teacherName,
+                    courseMaterials: courseMaterials,
+                    courseFile: fileName
+                });
+
+                renderCourses();
+                clearCourseForm();
+            } else {
+                alert('Please fill in all required fields');
+            }
+        }
+
+        function renderCourses() {
+            const courseTable = document.getElementById('courseTable').getElementsByTagName('tbody')[0];
+            courseTable.innerHTML = ''; // Clear existing courses
+
+            courses.forEach((course, index) => {
+                const row = courseTable.insertRow();
+                row.innerHTML = `
+                    <td>${course.courseName}</td>
+                    <td>${course.teacherName}</td>
+                    <td>${course.courseMaterials}</td>
+                    <td>${course.courseFile ? `<a href="#">${course.courseFile}</a>` : 'No file uploaded'}</td>
+                    <td>
+                        <button onclick="editCourse(${index})">Edit</button>
+                        <button onclick="deleteCourse(${index})">Delete</button>
+                    </td>
+                `;
+            });
+        }
+
+        function editCourse(index) {
+            const course = courses[index];
+            document.getElementById('courseName').value = course.courseName;
+            document.getElementById('teacherSelect').value = course.teacherName;
+            document.getElementById('courseMaterials').value = course.courseMaterials;
+            deleteCourse(index);
+        }
+
+        function deleteCourse(index) {
+            courses.splice(index, 1);
+            renderCourses();
+        }
+
+        function clearCourseForm() {
+            document.getElementById('courseName').value = '';
+            document.getElementById('teacherSelect').value = '';
+            document.getElementById('courseMaterials').value = '';
+            document.getElementById('courseFile').value = ''; // Clear file input
+        }
+    </script>
+
+</body>
+</html>

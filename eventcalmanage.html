@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Calendar Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .event-form {
+            margin-bottom: 30px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .status {
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .upcoming {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .completed {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .file-upload {
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Event Calendar Management</h2>
+
+        <!-- Event Management Form -->
+        <div class="event-form">
+            <h3>Schedule an Event</h3>
+            <input type="text" id="eventName" placeholder="Event Name" required>
+            <input type="datetime-local" id="eventDate" required>
+            <textarea id="eventDescription" rows="4" placeholder="Event Description"></textarea>
+            <button onclick="addEvent()">Add Event</button>
+        </div>
+
+        <!-- Event List -->
+        <table id="eventTable">
+            <thead>
+                <tr>
+                    <th>Event Name</th>
+                    <th>Event Date</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Events will be listed here dynamically -->
+            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+        // Event Management
+        let events = [];
+
+        function addEvent() {
+            const eventName = document.getElementById('eventName').value;
+            const eventDate = document.getElementById('eventDate').value;
+            const eventDescription = document.getElementById('eventDescription').value;
+
+            if (eventName && eventDate) {
+                events.push({
+                    eventName: eventName,
+                    eventDate: eventDate,
+                    eventDescription: eventDescription,
+                    status: 'Upcoming'  // Default status is 'Upcoming'
+                });
+
+                renderEvents();
+                clearEventForm();
+            } else {
+                alert('Please fill in all required fields');
+            }
+        }
+
+        function renderEvents() {
+            const eventTable = document.getElementById('eventTable').getElementsByTagName('tbody')[0];
+            eventTable.innerHTML = ''; // Clear existing events
+
+            events.forEach((event, index) => {
+                const row = eventTable.insertRow();
+                const eventStatus = new Date(event.eventDate) > new Date() ? 'Upcoming' : 'Completed';
+                const statusClass = eventStatus === 'Upcoming' ? 'upcoming' : 'completed';
+
+                row.innerHTML = `
+                    <td>${event.eventName}</td>
+                    <td>${event.eventDate}</td>
+                    <td>${event.eventDescription}</td>
+                    <td><span class="status ${statusClass}">${eventStatus}</span></td>
+                    <td>
+                        <button onclick="editEvent(${index})">Edit</button>
+                        <button onclick="deleteEvent(${index})">Delete</button>
+                    </td>
+                `;
+            });
+        }
+
+        function editEvent(index) {
+            const event = events[index];
+            document.getElementById('eventName').value = event.eventName;
+            document.getElementById('eventDate').value = event.eventDate;
+            document.getElementById('eventDescription').value = event.eventDescription;
+            deleteEvent(index);
+        }
+
+        function deleteEvent(index) {
+            events.splice(index, 1);
+            renderEvents();
+        }
+
+        function clearEventForm() {
+            document.getElementById('eventName').value = '';
+            document.getElementById('eventDate').value = '';
+            document.getElementById('eventDescription').value = '';
+        }
+    </script>
+
+</body>
+</html>

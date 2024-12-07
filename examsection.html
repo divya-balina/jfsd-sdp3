@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Section</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(rgba(27, 205, 236, 0.6), rgba(73, 46, 207, 0.6));
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 900px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2a4d69;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        .section {
+            margin-top: 25px;
+        }
+        .section h2 {
+            font-size: 1.5em;
+            color: #333;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #2a4d69;
+            margin-bottom: 15px;
+        }
+        .exam-info {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background: #f9fafb;
+            border-left: 5px solid #2a4d69;
+            transition: background 0.3s;
+        }
+        .exam-info:hover {
+            background: #eef5f7;
+        }
+        .icon {
+            font-size: 1.5em;
+            color: #2a4d69;
+            margin-right: 15px;
+        }
+        .exam-details {
+            flex: 1;
+        }
+        .exam-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+        }
+        .exam-date, .exam-time {
+            color: #666;
+            font-size: 0.9em;
+        }
+        .results, .tips {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #fcfcfc;
+            border: 1px solid #e0e0e0;
+        }
+        .results div, .tips div {
+            margin-bottom: 8px;
+        }
+        .result-item, .tip-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+        .result-item:hover, .tip-item:hover {
+            background: #f3f7f9;
+        }
+        .result-grade {
+            font-weight: bold;
+            color: #2a4d69;
+            margin-left: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Exam Section</h1>
+
+        <!-- Exam Schedule -->
+        <div class="section">
+            <h2>Upcoming Exam Schedule</h2>
+            <div class="exam-info">
+                <i class="fas fa-calendar-alt icon"></i>
+                <div class="exam-details">
+                    <div class="exam-title">Mathematics Exam</div>
+                    <div class="exam-date">Date: April 15, 2024</div>
+                    <div class="exam-time">Time: 10:00 AM - 12:00 PM</div>
+                </div>
+            </div>
+            <div class="exam-info">
+                <i class="fas fa-calendar-alt icon"></i>
+                <div class="exam-details">
+                    <div class="exam-title">Physics Exam</div>
+                    <div class="exam-date">Date: April 20, 2024</div>
+                    <div class="exam-time">Time: 1:00 PM - 3:00 PM</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results & Grades -->
+        <div class="section">
+            <h2>Recent Exam Results</h2>
+            <div class="results">
+                <div class="result-item">
+                    <i class="fas fa-graduation-cap icon"></i>
+                    <span>Mathematics Exam:</span>
+                    <span class="result-grade">85%</span>
+                </div>
+                <div class="result-item">
+                    <i class="fas fa-graduation-cap icon"></i>
+                    <span>Physics Exam:</span>
+                    <span class="result-grade">78%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exam Preparation Tips -->
+        <div class="section">
+            <h2>Exam Preparation Tips</h2>
+            <div class="tips">
+                <div class="tip-item">
+                    <i class="fas fa-lightbulb icon"></i>
+                    <span>Review past papers for familiar topics.</span>
+                </div>
+                <div class="tip-item">
+                    <i class="fas fa-lightbulb icon"></i>
+                    <span>Prioritize difficult topics early in your study schedule.</span>
+                </div>
+                <div class="tip-item">
+                    <i class="fas fa-lightbulb icon"></i>
+                    <span>Practice time management by simulating exam conditions.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
